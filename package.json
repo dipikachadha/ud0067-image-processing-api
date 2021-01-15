@@ -4,7 +4,9 @@
   "description": "Image Processing API project for Udacity's fullstack nanodegree program",
   "main": "dist/index.js",
   "scripts": {
-    "lint": "eslint src/server/*.ts",
+    "lint": "eslint . --ext .ts",
+    "build": "rm -rf dist && tsc",
+    "start": "npm run build && node dist/server.js",
     "test": "jest"
   },
   "keywords": [
