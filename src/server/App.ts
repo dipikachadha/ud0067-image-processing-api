@@ -2,7 +2,7 @@ import express, {Application} from 'express';
 import logger from './middleware/logger';
 import validateParams from './middleware/validateParams';
 
-export default class App {
+export class App {
   public app: Application;
   public port: number;
   public helpMsg: string;
@@ -25,6 +25,7 @@ export default class App {
   }
 
   private initControllers(controllers: [any]) {
+    // Generic controller installation
     controllers.forEach(controller => {
       this.app.use('/', controller.router);
     })

@@ -22,16 +22,6 @@ export default class ImageController {
     const cacheDir = currentDir + "/cache/";
 
     fs.mkdirSync(cacheDir, {recursive: true});
-    // try {
-    //   if (!fs.existsSync(cacheDir)) {
-    //     fs.mkdir(cacheDir, e => {
-    //       if (e) {
-    //         throw Error("Filesystem Error:" + e)
-    //       }});
-    //     }  
-    // } catch (e) {
-    //   throw Error(e);
-    // }
 
     console.log(`Picking images from ${assetsPath}`);
     const imgOrig = assetsPath + "/" + img + ".jpg";
@@ -41,10 +31,12 @@ export default class ImageController {
                         + ".jpg";
 
     try {
-      // Resize image
-      // TODO: Resize only if the image does not already exist
-      await sharp(imgOrig).resize(width, height).toFile(imgOutput);
-
+      // Resize image -- only if it does not already exist!
+      if (!fs.existsSync(`${imgOutput}`)) {
+        console.info(`Resizing ${imgOrig} -- can take a second!`);
+        await sharp(imgOrig).resize(width, height).toFile(imgOutput);
+      }
+  
       // Serve it down
       const stream = fs.createReadStream(imgOutput);
       stream.pipe(res);
