@@ -37,12 +37,15 @@ describe('/api endpoint test', () => {
       }
     });
   
-    it('should return 400 if email is invalid', async () => {
+    it('should respond with 200 on good access', async () => {
       const res = await request(server)
         .get("/api?img=fjord&height=100&width=100");
-
-  
       expect(res.status).toBe(200);
-      // expect(res.body).toHaveProperty('errArray');
     }, 1000);
+
+    it('should respond with 400 for bad endpoints', async () => {
+      const res = await request(server)
+        .get("/api");
+      expect(res.status).toBe(400);
+    })
   });
