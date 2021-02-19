@@ -5,10 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "dev": "nodemon src/server/startServer.ts",
+    "dev": "export NODE_ENV=development && nodemon src/server/server.ts",
     "build": "rm -rf dist && tsc",
-    "start": "npm run build && node dist/startServer.js",
-    "test": "jest"
+    "start": "npm run build && node dist/server.js",
+    "test": "export NODE_ENV=development && jest --coverage --verbose --detectOpenHandles"
   },
   "keywords": [
     "typescript",

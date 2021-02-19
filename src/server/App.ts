@@ -32,8 +32,8 @@ export class App {
   }
 
   public listen() {
-    this.app.listen(this.port, () => {
-      return console.log(`Server started on port ${this.port}`);
+    return this.app.listen(this.port, () => {
+      console.log(`Server started on port ${this.port}`);
     });
 
     // this.app.get('/', (_, res) => res.send(this.helpMsg));

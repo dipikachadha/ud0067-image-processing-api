@@ -1,7 +1,8 @@
 import express, {Request, Response} from 'express';
-import path from "path";
 import sharp from "sharp";
 import fs from "fs";
+import path from "path";
+import { ASSETS_PATH } from './constants';
 
 export default class ImageController {
   public endpoint = '/api';
@@ -18,8 +19,9 @@ export default class ImageController {
     const width: number = Number(req.query.width);
     console.log("Resizing!")
     const currentDir = path.resolve(__dirname);
-    const assetsPath = path.resolve(__dirname, "../src/images/starter/images");
-    const cacheDir = currentDir + "/cache/";
+    const assetsPath = ASSETS_PATH;
+    // path.resolve(__dirname, "../src/images/starter/images");
+    const cacheDir = currentDir + '/cache/'
 
     fs.mkdirSync(cacheDir, {recursive: true});
 
