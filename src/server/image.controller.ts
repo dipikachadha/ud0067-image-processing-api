@@ -2,7 +2,7 @@ import express, {Request, Response} from 'express';
 import sharp from "sharp";
 import fs from "fs";
 import path from "path";
-import { ASSETS_PATH } from './constants';
+import { debugInfo, ASSETS_PATH } from './constants';
 
 export default class ImageController {
   public endpoint = '/api';
@@ -17,7 +17,7 @@ export default class ImageController {
     const img = req.query.img;
     const height: number = Number(req.query.height);
     const width: number = Number(req.query.width);
-    console.log("Resizing!")
+
     const currentDir = path.resolve(__dirname);
     const assetsPath = ASSETS_PATH;
     // path.resolve(__dirname, "../src/images/starter/images");
@@ -25,7 +25,7 @@ export default class ImageController {
 
     fs.mkdirSync(cacheDir, {recursive: true});
 
-    console.log(`Picking images from ${assetsPath}`);
+    debugInfo(`Picking images from ${assetsPath}`);
     const imgOrig = assetsPath + "/" + img + ".jpg";
     const imgOutput = cacheDir + img 
                         + "_" + String(height) 
@@ -35,7 +35,7 @@ export default class ImageController {
     try {
       // Resize image -- only if it does not already exist!
       if (!fs.existsSync(`${imgOutput}`)) {
-        console.info(`Resizing ${imgOrig} -- can take a second!`);
+        debugInfo(`Resizing ${imgOrig} -- can take a second!`);
         await sharp(imgOrig).resize(width, height).toFile(imgOutput);
       }
   
