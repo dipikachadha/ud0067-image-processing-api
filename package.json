@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint . --ext .ts",
+    "lint-fix": "eslint . --ext .ts --fix",
     "dev": "export NODE_ENV=development && nodemon src/server/server.ts",
     "build": "rm -rf dist && tsc",
     "start": "npm run build && node dist/server.js",

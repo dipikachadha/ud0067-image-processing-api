@@ -1,4 +1,4 @@
-import request from "supertest";
+import request from 'supertest';
 // import {Server} from "express";
 // import { App } from "../server/App";
 // import { server } from "../server/server";
@@ -25,27 +25,27 @@ import request from "supertest";
 // });
 
 describe('/api endpoint test', () => {
-    let server: any;
-    beforeAll(async () => {
-      const mod = await import('../server/server');
-      server = mod.default;
-    });
-  
-    afterAll((done) => {
-      if (server) {
-        server.close(done);
-      }
-    });
-  
-    it('should respond with 200 on good access', async () => {
-      const res = await request(server)
-        .get("/api?img=fjord&height=100&width=100");
-      expect(res.status).toBe(200);
-    }, 1000);
-
-    it('should respond with 400 for bad endpoints', async () => {
-      const res = await request(server)
-        .get("/api");
-      expect(res.status).toBe(400);
-    })
+  let server: any;
+  beforeAll(async () => {
+    const mod = await import('../server/server');
+    server = mod.default;
   });
+
+  afterAll((done) => {
+    if (server) {
+      server.close(done);
+    }
+  });
+
+  it('should respond with 200 on good access', async () => {
+    const res = await request(server)
+        .get('/api?img=fjord&height=100&width=100');
+    expect(res.status).toBe(200);
+  }, 1000);
+
+  it('should respond with 400 for bad endpoints', async () => {
+    const res = await request(server)
+        .get('/api');
+    expect(res.status).toBe(400);
+  });
+});
